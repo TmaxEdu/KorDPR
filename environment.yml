@@ -1,0 +1,19 @@
+name: kordpr
+channels:
+  - pytorch
+  - conda-forge
+  - anaconda
+dependencies:
+  - faiss-gpu
+  - scipy
+  - numpy
+  - pandas
+  - pip
+  - tqdm
+  - transformers
+  - sentencepiece
+  - pytest
+  - wandb
+  - pip:
+    - "git+https://github.com/SKTBrain/KoBERT.git#egg=kobert_tokenizer&subdirectory=kobert_hf"
+    - wikiextractor

@@ -4,9 +4,16 @@
 
 ## KorDPR
 
-한국어 dense passage retrieval 모델입니다. 한국어 wikipedia index를 생성하는 소스와 관련된 성능 benchmark 또한 제공합니다.
+한국어 위키로 인덱스를 만들고 KorQuAD 데이터셋을 활용해 학습할 수 있도록 하는 dense passage retrieval(DPR) 소스코드 입니다. 
 
-### Quickstart
+### 모델 설명
+
+DPR 모델은 두 BERT 모델을 활용하여 query와 passage를 각각 인코딩하고 cls 토큰의 dot product를 통해 유사도를 측정합니다. 학습 데이터는 한국어 위키 기반의 데이터인 KorQuAD 1.0을 사용하였고 실제 ground truth passage를 찾기 위해서는 수작업이 필요하므로 DPR 논문에서 제안한 바와 같이 distant supervision을 사용하였습니다. query에 해당되는 정답 span을 추론할 수 있는 passage가 gold passage라고 한다면, 단순히 문제가 출제된 article 내에서 정답 span이 들어있는 passage를 silver passage라고 할 수 있습니다. 미리 구축해 둔(100단어 단위로 잘린) passage 내에서 데이터셋의 각 query에 맞는 silver passage를 매칭하여 정답으로 활용하였습니다. 학습 방법은 DPR 논문에서 제안한 바와 같이 in-batch negative를 활용한 nll loss로 학습하였습니다. 이 방식은 batch 내에 동일한 정답 passage를 갖는 query가 없다면 랜덤하게 negative sample을 뽑는 대신 batch 내에서 outer product를 통해 쉽게 negative sample을 확보하는 방법입니다. 이 경우 outer product를 한 B x B 개의 logit 값들의 주대각선이 최대화 되도록 학습할 수 있습니다.
+
+현재 passage나 query 모델로는 skt/kobert-base-v1 모델을 사용하고 있습니다.  
+
+
+### How To Run
 
 1. torch 및 python 환경은 `nvcr.io/nvidia/pytorch:21.11-py3` 도커 이미지를 사용하시는 것을 권장합니다.
 소스코드는 torch 1.10.2 버전 및 python 3.8.12 버전에서 테스트하였습니다.
@@ -74,7 +81,6 @@ passage : [CLS] 한인애국단[SEP] 주지의 사실이다. 이러한 반향을
 passage : [CLS] 영중 관계[SEP]았다. 이에 헨리 존 템플 수상은 하원을 해산시키고 총선거에 의한 신임을 묻게 되었다. 결국 새로 구성된 하원에서는 대중국 전쟁문제를 동의하였다. 또한, 불법적인 포교활동을 하고 있던 프랑스 선교사를 처형한 사건을 구실로 영국과 프랑스가 전쟁을 도발하게 된다. 1857년 영국은 애로호 사건을 구실로 프랑스와 연합군을 구성해 광저우 시내로 침, sim : 69.55464172363281
 passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 중국 민주 동맹과 덩샤오핑의 계엄령을 따랐다. 톈안먼 사건(천안문 사건) 이후, 중국 경제 정책 전반에는 정책 조정 기조가 형성되었다. 1990년 9월, 제8기 5개년 계획에는 신중이 기해졌으며 최종안은 덩샤오핑과 주룽지 상하이 시 당위원회 서기 등과의 협의를 거쳐, sim : 69.54267120361328
 ```
-
 
 ### Benchmark
 

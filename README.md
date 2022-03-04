@@ -85,14 +85,16 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 ### Benchmark
 
 - KorQuAD 1.0 dev set in-batch(B=96) retrieval accuracy : 0.5578(loss = 1.4916)
-- kowiki top-20, top-100 retrieval accuracy : TBD 
+- KorQuAD dev set top-k retrieval accuracy
+
+![retrieval_accuracy](./retrieval_accuracy.png)
 
 
 ### ToDo
 
 - [ ] passage chunking multi-process 적용
 - [ ] dense flat index 외에 다른 index 지원
-- [ ] benchmark 업데이트
+- [x] benchmark 업데이트
 - [ ] 데모 페이지 작성
 
 ### Reference 및 Dataset 정보

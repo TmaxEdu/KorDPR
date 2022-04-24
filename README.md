@@ -85,10 +85,21 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 ### Benchmark
 
 - KorQuAD 1.0 dev set in-batch(B=96) retrieval accuracy : 0.5578(loss = 1.4916)
-- KorQuAD dev set top-k retrieval accuracy
+- KorQuAD dev set retrieval accuracy
 
 ![retrieval_accuracy](./retrieval_accuracy.png)
 
+### Checkpoints
+
+- [model checkpoint](https://drive.google.com/file/d/1gfL2YMWr1R8zWucMHDJ6p_h6Pmw_1YJt/view?usp=sharing) : 학습된 pytorch model binary. 크기는 약 704M.
+- [FAISS index](https://drive.google.com/file/d/1KCqysjdUgR4JZXa0jSOR8k12RHuRIy4H/view?usp=sharing) : 위의 모델을 활용하여 빌드된 dense flat index 파일. 2,205,090개의 passage(wiki 조각)을 가지고 있습니다. 크기는 약 6.4G.
+
+### Notes
+
+- star 주신 분들 감사합니다! 모델 checkpoint를 업로드하고 README를 보강했습니다. 
+- 이 리포에는 hard negative는 구현하지 않았습니다. 만약 성능을 최대로 끌어올리셔야 한다면 다음을 참고해보시면 도움이 될 것 같습니다.
+  - DPR paper에는 BM25를 활용해 뽑은 hard negative를 batch별로 1개 넣어 학습하면 성능이 더 오른다고 리포트하였습니다. 
+  - [DPR 리포](https://github.com/facebookresearch/DPR#new-march-2021-retrieval-model)에는 기존 checkpoint를 활용한 hard negative를 사용하면 BM25를 이용한 hard negative보다 성능을 더 올릴수 있다고 보고하고 있습니다. 
 
 ### ToDo
 
@@ -97,13 +108,13 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 - [x] benchmark 업데이트
 - [ ] 데모 페이지 작성
 
+
+
 ### Reference 및 Dataset 정보
 
 - [Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
 - [KorQUAD 1.0](https://korquad.github.io/KorQuad%201.0/)
-- [KLUE MRC](https://github.com/KLUE-benchmark/KLUE/tree/main/klue_benchmark/klue-mrc-v1.1)
 - [Korean Wikipedia](https://dumps.wikimedia.org/kowiki/20220120/)
-- [Namuwiki](https://mu-star.net/wikidb#dump-namuwiki)
 - [wikiextractor](https://github.com/attardi/wikiextractor)
 - [skt/kobert-base-v1](https://github.com/SKTBrain/KoBERT)
 

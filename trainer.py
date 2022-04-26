@@ -66,26 +66,20 @@ class Trainer:
             num_workers=4,
         )
 
+        self.batch_size = batch_size
         self.num_epoch = num_epoch
         self.valid_every = valid_every
+        self.lr = lr 
+        self.betas = betas 
+        self.num_warmup_steps = num_warmup_steps 
+        self.num_training_steps = num_training_steps
         self.best_val_ckpt_path = best_val_ckpt_path
         self.best_val_optim_path = best_val_ckpt_path.split(".pt")[0] + "_optim.pt"
 
         self.start_ep = 1
         self.start_step = 1
 
-        wandb.init(
-            project="kordpr",
-            entity="lucas01",
-            config={
-                "batch_size": batch_size,
-                "lr": lr,
-                "betas": betas,
-                "num_warmup_steps": num_warmup_steps,
-                "num_training_steps": num_training_steps,
-                "valid_every": valid_every,
-            },
-        )
+        
 
     def ibn_loss(self, pred: torch.FloatTensor):
         """in-batch negative를 활용한 batch의 loss를 계산합니다.
@@ -103,6 +97,18 @@ class Trainer:
 
     def fit(self):
         """모델을 학습합니다."""
+        wandb.init(
+            project="kordpr",
+            entity="lucas01",
+            config={
+                "batch_size": self.batch_size,
+                "lr": self.lr,
+                "betas": self.betas,
+                "num_warmup_steps": self.num_warmup_steps,
+                "num_training_steps": self.num_training_steps,
+                "valid_every": self.valid_every,
+            },
+        )
         logger.debug("start training")
         self.model.train()  # 학습모드
         global_step_cnt = 0

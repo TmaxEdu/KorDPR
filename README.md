@@ -84,7 +84,6 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 
 ### Benchmark
 
-- KorQuAD 1.0 dev set in-batch(B=96) retrieval accuracy : 0.5578(loss = 1.4916)
 - KorQuAD dev set retrieval accuracy
 
 ![retrieval_accuracy](./retrieval_accuracy.png)
@@ -92,6 +91,7 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 ### Checkpoints
 
 - [model checkpoint](https://drive.google.com/file/d/1gfL2YMWr1R8zWucMHDJ6p_h6Pmw_1YJt/view?usp=sharing) : 학습된 pytorch model binary. 크기는 약 704M.
+  - 해당 모델의 학습 로그는 [여기](https://wandb.ai/lucas01/kordpr?workspace=user-lucas01)서 확인하실 수 있습니다.
 - [FAISS index](https://drive.google.com/file/d/1KCqysjdUgR4JZXa0jSOR8k12RHuRIy4H/view?usp=sharing) : 위의 모델을 활용하여 빌드된 dense flat index 파일. 2,205,090개의 passage(wiki 조각)을 가지고 있습니다. 크기는 약 6.4G.
 
 ### Notes

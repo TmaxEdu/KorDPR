@@ -85,6 +85,7 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 ### Benchmark
 
 - KorQuAD dev set retrieval accuracy
+  - 논문에서 활용한 retrieval accuracy 계산 방법을 사용하였습니다. 먼저 학습된 모델의 passage encoder를 활용하여 한국어 위키피디아 인덱스를 만듭니다. 이 인덱스에 validation set의 question에 대한 retrieval을 수행합니다. 검색된 passage 안에서 해당 question의 gold passage가 있는지 체크하는 것이 아니라 answer span이 포함된 passage가 있는지 체크합니다. (데이터셋에 있는 passage와 위키 passage는 exact match는 불가능합니다.)  
 
 ![retrieval_accuracy](./retrieval_accuracy.png)
 

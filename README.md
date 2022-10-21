@@ -101,6 +101,7 @@ passage : [CLS] 야오이린[SEP][UNK]4 톈안먼 사건이 벌어졌을 때는 
 - 이 리포에는 hard negative는 구현하지 않았습니다. 만약 성능을 최대로 끌어올리셔야 한다면 다음을 참고해보시면 도움이 될 것 같습니다.
   - DPR paper에는 BM25를 활용해 뽑은 hard negative를 batch별로 1개 넣어 학습하면 성능이 더 오른다고 리포트하였습니다. 
   - [DPR 리포](https://github.com/facebookresearch/DPR#new-march-2021-retrieval-model)에는 기존 checkpoint를 활용한 hard negative를 사용하면 BM25를 이용한 hard negative보다 성능을 더 올릴수 있다고 보고하고 있습니다. 
+- 이 리포를 연구에 활용하시는 경우 우측 패널에 있는 'cite this repository'를 눌러 인용해 주시면 감사하겠습니다.
 
 ### ToDo
 
